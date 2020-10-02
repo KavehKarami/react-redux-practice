@@ -1,17 +1,32 @@
 import React, { Component } from 'react';
 import StoreContext from '../contexts/storeContext';
+import { loadBugs } from '../store/bugs';
 
 class Bugs extends Component {
   static contextType = StoreContext;
 
+  state = {
+    bugs: []
+  }
+
   componentDidMount() {
-    console.log(this.context)
+    const store = this.context;
+
+    store.subscribe(() => {
+      const bugsInStore = store.getState().entities.bugs.list;
+      if (bugsInStore !== this.state.bugs)
+        this.setState({ bugs: bugsInStore })
+    })
+
+    store.dispatch(loadBugs())
   }
 
   render() {
     return (
       <div>
-        Hello World!
+        {this.state.bugs.map((bug, index) => (
+          <div key={index}>{bug.description}</div>
+        ))}
       </div>
     );
   }
