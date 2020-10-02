@@ -12,13 +12,17 @@ class Bugs extends Component {
   componentDidMount() {
     const store = this.context;
 
-    store.subscribe(() => {
+    this.unSubscribe = store.subscribe(() => {
       const bugsInStore = store.getState().entities.bugs.list;
       if (bugsInStore !== this.state.bugs)
         this.setState({ bugs: bugsInStore })
     })
 
     store.dispatch(loadBugs())
+  }
+
+  componentWillUnmount() {
+    this.unSubscribe()
   }
 
   render() {
