@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Bugs from "./components/Bugs";
 import configureStore from "./store/configureStore";
-import StoreContext from "./contexts/storeContext";
+import { Provider } from "react-redux";
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreContext.Provider value={store}>
+    <Provider store={store}>
       <Bugs />
-    </StoreContext.Provider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
