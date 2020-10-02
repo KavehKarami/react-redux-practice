@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import Bugs from "./components/Bugs";
+import Bugs from "./components/Bugs";
 import configureStore from "./store/configureStore";
 import { Provider } from "react-redux";
-import BugsList from "./components/BugsList";
+// import BugsList from "./components/BugsList";
 import "./styles.css";
 
 const store = configureStore();
@@ -11,7 +11,7 @@ const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BugsList />
+      <Bugs />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
