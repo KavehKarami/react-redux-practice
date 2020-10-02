@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUnresolvedBugs, loadBugs } from '../store/bugs';
+import { getUnresolvedBugs, loadBugs, resolvedBug } from '../store/bugs';
 
 const BugsList = () => {
 
@@ -16,10 +16,18 @@ const BugsList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+
+  const handleResolved = (bugId) => {
+    dispatch(resolvedBug(bugId))
+  }
+
   return (
     <div>
       {bugs.map((bug, index) => (
-        <div key={index}>{bug.description}</div>
+        <div className="mb-3" key={index}>
+          <span>{bug.description}</span>
+          <button onClick={() => handleResolved(bug._id)} className="ml-3">Resolve it</button>
+        </div>
       ))}
     </div>
   );
